@@ -1,0 +1,5 @@
+name: 'Aqto Defaults'
+type: module
+description: 'Provides some default configuration for a streamlined Aqto site setup.'
+package: Aqto
+core_version_requirement: ^10 || ^11
