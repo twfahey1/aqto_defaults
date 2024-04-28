@@ -1,0 +1,16 @@
+{
+    "name": "twfahey1/aqto_defaults",
+    "type": "drupal-module",
+    "description": "A Drupal module which provides default configuration for an Aqto project. This gets Aqto projects up and running quickly with a standard set of features.",
+    "keywords": ["Drupal", "module"],
+    "homepage": "https://github.com/twfahey1/aqto_defaults",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Tyler Fahey",
+            "email": "twfahey1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
