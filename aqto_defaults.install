@@ -31,6 +31,8 @@ function aqto_defaults_install()
 
     // Place the 'Primary admin actions' block
     place_block('aqto_theme_base', 'content', 'local_actions_block', 'Primary admin actions', 0);
+    // Place the 'Tabs' block
+    place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 1); // Adjusted weight to place it below the 'Primary admin actions' block.
 
     // Place the 'aqto_blocks_aqto_admin_dashboard_example' block in the 'content' region.
     $block_manager = \Drupal::service('plugin.manager.block');
@@ -43,7 +45,7 @@ function aqto_defaults_install()
         'plugin' => $plugin_block->getPluginId(),
         'theme' => 'aqto_theme_base',
         'visibility' => [],
-        'weight' => 1,  // Adjusted to follow the Primary admin actions block.
+        'weight' => 2,  // Adjusted to follow the Primary admin actions block.
     ]);
     $block_entity->save();
 }
