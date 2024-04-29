@@ -8,6 +8,7 @@ function aqto_defaults_install()
     // Ensure 'aqto_blocks' module is enabled.
     \Drupal::service('module_installer')->install([
         'aqto_blocks',
+        'aqto_page',
         'admin_toolbar_tools',
     ], TRUE);
 
