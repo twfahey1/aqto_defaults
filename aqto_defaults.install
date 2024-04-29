@@ -29,6 +29,9 @@ function aqto_defaults_install()
         $block->delete();
     }
 
+    // Place the 'Primary admin actions' block
+    place_block('aqto_theme_base', 'content', 'local_actions_block', 'Primary admin actions', 0);
+
     // Place the 'aqto_blocks_aqto_admin_dashboard_example' block in the 'content' region.
     $block_manager = \Drupal::service('plugin.manager.block');
     $config = [];
@@ -40,7 +43,29 @@ function aqto_defaults_install()
         'plugin' => $plugin_block->getPluginId(),
         'theme' => 'aqto_theme_base',
         'visibility' => [],
-        'weight' => 0,
+        'weight' => 1,  // Adjusted to follow the Primary admin actions block.
+    ]);
+    $block_entity->save();
+}
+
+function place_block($theme, $region, $plugin_id, $label, $weight)
+{
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $config = [
+        'id' => $plugin_id,
+        'label' => $label,
+        'provider' => 'core',  // Updated as per config export showing provider as 'core'
+        'label_display' => '0', // Hiding the label as per the export settings
+    ];
+    $plugin_block = $block_manager->createInstance($plugin_id, $config);
+    $block_entity = \Drupal\block\Entity\Block::create([
+        'id' => $theme . '_' . strtolower(str_replace(' ', '', $label)),
+        'region' => $region,
+        'provider' => null, // No specific provider is needed as it is a core block
+        'plugin' => $plugin_id,
+        'theme' => $theme,
+        'visibility' => [],
+        'weight' => $weight,
     ]);
     $block_entity->save();
 }
