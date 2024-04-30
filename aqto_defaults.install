@@ -37,7 +37,7 @@ function aqto_defaults_install()
     place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 1); // Adjusted weight to place it below the 'Primary admin actions' block.
 
     // Place the custom 'Aqto Menu' block
-    place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', 'Aqto Menu', 0);
+    place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', '', 0);
 
     // Place the 'aqto_blocks_aqto_admin_dashboard_example' block in the 'content' region.
     $block_manager = \Drupal::service('plugin.manager.block');
@@ -68,6 +68,7 @@ function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
         'example' => 'Hello world!'    // Example additional setting
     ];
     $plugin_block = $block_manager->createInstance($plugin_id, $config);
+    
     $block_entity = \Drupal\block\Entity\Block::create([
         'id' => $theme . '_' . strtolower(str_replace(' ', '', $label)),
         'region' => $region,
@@ -76,6 +77,12 @@ function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
         'theme' => $theme,
         'visibility' => [],
         'weight' => $weight,
+        'settings' => [
+            'label_display' => '0', 
+            'menu_to_use' => 'main', // Ensure this setting is passed here
+            'menu_title' => '[site:name]', // And this one too
+        ]
+
     ]);
     $block_entity->save();
 }
