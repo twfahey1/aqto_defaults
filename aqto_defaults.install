@@ -68,7 +68,7 @@ function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
         'example' => 'Hello world!'    // Example additional setting
     ];
     $plugin_block = $block_manager->createInstance($plugin_id, $config);
-    
+
     $block_entity = \Drupal\block\Entity\Block::create([
         'id' => $theme . '_' . strtolower(str_replace(' ', '', $label)),
         'region' => $region,
@@ -78,10 +78,10 @@ function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
         'visibility' => [],
         'weight' => $weight,
         'settings' => [
-            'label_display' => '0', 
+            'label_display' => '0',
             'menu_to_use' => 'main', // Ensure this setting is passed here
             'menu_title' => '[site:name]', // And this one too
-        ]
+        ],
 
     ]);
     $block_entity->save();
