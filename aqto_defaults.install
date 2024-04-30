@@ -10,6 +10,7 @@ function aqto_defaults_install()
         'aqto_blocks',
         'aqto_page',
         'admin_toolbar_tools',
+        'features_ui'
     ], TRUE);
 
     // Enable 'aqto_theme_base' and set it as the default theme.
@@ -35,6 +36,9 @@ function aqto_defaults_install()
     // Place the 'Tabs' block
     place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 1); // Adjusted weight to place it below the 'Primary admin actions' block.
 
+    // Place the custom 'Aqto Menu' block
+    place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', 'Aqto Menu', 0);
+
     // Place the 'aqto_blocks_aqto_admin_dashboard_example' block in the 'content' region.
     $block_manager = \Drupal::service('plugin.manager.block');
     $config = [];
@@ -47,6 +51,31 @@ function aqto_defaults_install()
         'theme' => 'aqto_theme_base',
         'visibility' => [],
         'weight' => 2,  // Adjusted to follow the Primary admin actions block.
+    ]);
+    $block_entity->save();
+}
+
+function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
+{
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $config = [
+        'id' => $plugin_id,
+        'label' => $label,
+        'provider' => 'aqto_blocks',  // Set provider as 'aqto_blocks'
+        'label_display' => '0',        // Hiding the label
+        'menu_to_use' => 'main',       // Menu to use
+        'menu_title' => '[site:name]', // Title of the menu
+        'example' => 'Hello world!'    // Example additional setting
+    ];
+    $plugin_block = $block_manager->createInstance($plugin_id, $config);
+    $block_entity = \Drupal\block\Entity\Block::create([
+        'id' => $theme . '_' . strtolower(str_replace(' ', '', $label)),
+        'region' => $region,
+        'provider' => 'aqto_blocks',   // Set the provider
+        'plugin' => $plugin_id,
+        'theme' => $theme,
+        'visibility' => [],
+        'weight' => $weight,
     ]);
     $block_entity->save();
 }
@@ -72,6 +101,8 @@ function place_block($theme, $region, $plugin_id, $label, $weight)
     ]);
     $block_entity->save();
 }
+
+
 
 /**
  * Implements hook_uninstall().
