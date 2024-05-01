@@ -32,9 +32,14 @@ function aqto_defaults_install()
     }
 
     // Place the 'Primary admin actions' block
-    place_block('aqto_theme_base', 'content', 'local_actions_block', 'Primary admin actions', 0);
+    place_block('aqto_theme_base', 'content', 'local_actions_block', 'Primary admin actions', 1);
     // Place the 'Tabs' block
-    place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 1); // Adjusted weight to place it below the 'Primary admin actions' block.
+    place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 2); // Adjusted weight to place it below the 'Primary admin actions' block.
+    // Place the 'Main page content' block
+    place_block('aqto_theme_base', 'content', 'system_main_block', 'Main page content', 3);
+    // Place the 'Messages' block
+    place_block('aqto_theme_base', 'content', 'system_messages_block', 'Messages', 4);
+
 
     // Place the custom 'Aqto Menu' block
     place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', '', 0);
@@ -87,20 +92,20 @@ function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
     $block_entity->save();
 }
 
-function place_block($theme, $region, $plugin_id, $label, $weight)
+function place_block($theme, $region, $plugin_id, $label, $weight, $provider = 'core', $label_display = '0')
 {
     $block_manager = \Drupal::service('plugin.manager.block');
     $config = [
         'id' => $plugin_id,
         'label' => $label,
-        'provider' => 'core',  // Updated as per config export showing provider as 'core'
-        'label_display' => '0', // Hiding the label as per the export settings
+        'provider' => $provider,
+        'label_display' => $label_display,
     ];
     $plugin_block = $block_manager->createInstance($plugin_id, $config);
     $block_entity = \Drupal\block\Entity\Block::create([
         'id' => $theme . '_' . strtolower(str_replace(' ', '', $label)),
         'region' => $region,
-        'provider' => null, // No specific provider is needed as it is a core block
+        'provider' => $provider,
         'plugin' => $plugin_id,
         'theme' => $theme,
         'visibility' => [],
@@ -108,6 +113,8 @@ function place_block($theme, $region, $plugin_id, $label, $weight)
     ]);
     $block_entity->save();
 }
+
+
 
 
 
