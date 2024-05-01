@@ -40,24 +40,24 @@ function aqto_defaults_install()
     // Place the 'Messages' block
     place_block('aqto_theme_base', 'content', 'system_messages_block', 'Messages', 4);
 
-
     // Place the custom 'Aqto Menu' block
     place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', '', 0);
 
+    // EXAMPLE:
     // Place the 'aqto_blocks_aqto_admin_dashboard_example' block in the 'content' region.
-    $block_manager = \Drupal::service('plugin.manager.block');
-    $config = [];
-    $plugin_block = $block_manager->createInstance('aqto_blocks_aqto_admin_dashboard_example', $config);
-    $block_entity = \Drupal\block\Entity\Block::create([
-        'id' => 'aqto_admin_dashboard_example',
-        'region' => 'content',
-        'provider' => 'aqto_blocks',
-        'plugin' => $plugin_block->getPluginId(),
-        'theme' => 'aqto_theme_base',
-        'visibility' => [],
-        'weight' => 2,  // Adjusted to follow the Primary admin actions block.
-    ]);
-    $block_entity->save();
+    // $block_manager = \Drupal::service('plugin.manager.block');
+    // $config = [];
+    // $plugin_block = $block_manager->createInstance('aqto_blocks_aqto_admin_dashboard_example', $config);
+    // $block_entity = \Drupal\block\Entity\Block::create([
+    //     'id' => 'aqto_admin_dashboard_example',
+    //     'region' => 'content',
+    //     'provider' => 'aqto_blocks',
+    //     'plugin' => $plugin_block->getPluginId(),
+    //     'theme' => 'aqto_theme_base',
+    //     'visibility' => [],
+    //     'weight' => 2,  // Adjusted to follow the Primary admin actions block.
+    // ]);
+    // $block_entity->save();
 }
 
 function place_custom_menu_block($theme, $region, $plugin_id, $label, $weight)
