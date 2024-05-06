@@ -10,7 +10,10 @@ function aqto_defaults_install()
         'aqto_blocks',
         'aqto_page',
         'admin_toolbar_tools',
-        'features_ui'
+        'features_ui',
+        'responsive_image',
+        'webp',
+        'media_library',
     ], TRUE);
 
     // Enable 'aqto_theme_base' and set it as the default theme.
