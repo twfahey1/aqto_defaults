@@ -10,6 +10,7 @@ function aqto_defaults_install()
         'admin_toolbar_tools',
         'aqto_blocks',
         'aqto_layout_builder_styles',
+        'aqto_text_formats',
         'aqto_page',
         'features_ui',
         'media_library',
