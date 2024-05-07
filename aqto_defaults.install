@@ -5,15 +5,16 @@
  */
 function aqto_defaults_install()
 {
-    // Ensure 'aqto_blocks' module is enabled.
+    // Ensure default modules are enabled. We could also do this in our info.yml as dependencies.
     \Drupal::service('module_installer')->install([
-        'aqto_blocks',
-        'aqto_page',
         'admin_toolbar_tools',
+        'aqto_blocks',
+        'aqto_layout_builder_styles',
+        'aqto_page',
         'features_ui',
+        'media_library',
         'responsive_image',
         'webp',
-        'media_library',
     ], TRUE);
 
     // Enable 'aqto_theme_base' and set it as the default theme.
