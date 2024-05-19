@@ -39,9 +39,9 @@ function aqto_defaults_install()
     // Place the custom 'Aqto Menu' block
     place_custom_menu_block('aqto_theme_base', 'content', 'aqto_blocks_aqto_menu_block', '', 0);
     // Place the 'Primary admin actions' block
-    place_block('aqto_theme_base', 'content', 'local_actions_block', 'Primary admin actions', 1);
+    place_block('aqto_theme_base', 'fixed_footer', 'local_actions_block', 'Primary admin actions', 1);
     // Place the 'Tabs' block
-    place_block('aqto_theme_base', 'content', 'local_tasks_block', 'Tabs', 2); // Adjusted weight to place it below the 'Primary admin actions' block.
+    place_block('aqto_theme_base', 'fixed_footer', 'local_tasks_block', 'Local tasks', 2); // Adjusted weight to place it below the 'Primary admin actions' block.
     // Place the 'Messages' block
     place_block('aqto_theme_base', 'content', 'system_messages_block', 'Messages', 3);
     // Place the 'Main page content' block
